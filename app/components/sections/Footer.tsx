@@ -1,0 +1,72 @@
+import React from 'react';
+import Link from 'next/link';
+
+export default function Footer() {
+  return (
+    <footer className="bg-stone-900 text-stone-300 pt-16 pb-8 md:pt-24 md:pb-12 font-man relative overflow-hidden">
+      {/* Decorative Top Border */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-50"></div>
+
+      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 mb-16">
+          
+          {/* Brand and Description */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <h3 className="text-3xl md:text-4xl font-marcellus text-stone-100 mb-6">
+              Hadayogam
+            </h3>
+            <div className="w-12 h-px bg-primary/50 mb-6"></div>
+            <p className="leading-relaxed text-stone-400 text-sm md:text-base">
+              A sanctuary for authentic Yoga, therapeutic bodywork, and mindful living. Embark on a profound journey into discovering your most authentic, balanced self.
+            </p>
+          </div>
+
+          {/* Quick Links */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <h4 className="text-sm md:text-base font-marcellus text-stone-100 mb-6 uppercase tracking-[0.2em]">
+              Explore
+            </h4>
+            <div className="w-12 h-px bg-primary/50 mb-6 md:hidden"></div>
+            <ul className="space-y-4 text-sm md:text-base">
+              <li><Link href="/" className="hover:text-primary transition-colors duration-300 flex items-center justify-center md:justify-start"><span className="text-primary/50 mr-2 text-xs">~</span> Home</Link></li>
+              <li><Link href="#about" className="hover:text-primary transition-colors duration-300 flex items-center justify-center md:justify-start"><span className="text-primary/50 mr-2 text-xs">~</span> About Us</Link></li>
+              <li><Link href="#founder" className="hover:text-primary transition-colors duration-300 flex items-center justify-center md:justify-start"><span className="text-primary/50 mr-2 text-xs">~</span> Our Founder</Link></li>
+              <li><Link href="#classes" className="hover:text-primary transition-colors duration-300 flex items-center justify-center md:justify-start"><span className="text-primary/50 mr-2 text-xs">~</span> Classes & Therapies</Link></li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <h4 className="text-sm md:text-base font-marcellus text-stone-100 mb-6 uppercase tracking-[0.2em]">
+              Visit Us
+            </h4>
+            <div className="w-12 h-px bg-primary/50 mb-6 md:hidden"></div>
+            <ul className="space-y-5 text-sm md:text-base text-stone-400">
+              <li className="flex flex-col items-center md:items-start">
+                <span className="text-primary uppercase tracking-widest text-xs mb-1.5 font-semibold">Location</span>
+                <span>Near Chamundeswary Temple<br/>Guruvayoor, Kerala</span>
+              </li>
+              <li className="flex flex-col items-center md:items-start">
+                <span className="text-primary uppercase tracking-widest text-xs mb-1.5 font-semibold">Contact</span>
+                <a href="tel:+910000000000" className="hover:text-primary transition-colors duration-300 mb-1">+91 00000 00000</a>
+                <a href="mailto:info@hadayogam.com" className="hover:text-primary transition-colors duration-300">info@hadayogam.com</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-stone-800 flex flex-col md:flex-row items-center justify-between text-xs text-stone-500 uppercase tracking-widest">
+          <p className="mb-4 md:mb-0">&copy; {new Date().getFullYear()} Hadayogam. All rights reserved.</p>
+          <div className="space-x-6 flex items-center">
+            <span className="w-1 h-1 rounded-full bg-stone-700 md:hidden"></span>
+            <Link href="/privacy" className="hover:text-stone-300 transition-colors duration-300">Privacy</Link>
+            <span className="w-1 h-1 rounded-full bg-stone-700"></span>
+            <Link href="/terms" className="hover:text-stone-300 transition-colors duration-300">Terms</Link>
+            <span className="w-1 h-1 rounded-full bg-stone-700 md:hidden"></span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

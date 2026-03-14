@@ -5,12 +5,14 @@ import Link from "next/link";
 import gsap from "gsap";
 import Image from "next/image";
 import MainLayout from "./layout/MainLayout";
-import About from "./components/ui/About";
+import About from "./components/sections/About";
+import Founder from "./components/sections/Founder";
 
 const heroImages = [
-  "/img1.jpg",
-  "/img2.jpg",
-  "/img3.jpg",
+  "/img1.jpeg",
+  "/img2.jpeg", 
+  "/img3.jpeg",
+  "/img4.jpeg",
 ];  
 
 export default function Home() {
@@ -95,42 +97,25 @@ export default function Home() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 mt-auto pb-24 md:pb-32">
-          <div className="max-w-2xl">
-            <h1 
-              ref={titleRef}
-              className="text-5xl md:text-8xl font-bask text-white mb-6 tracking-tight leading-[1.1]"
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 max-w-4xl mx-auto">
+          <h1 
+            ref={titleRef}
+            className="text-3xl md:text-4xl lg:text-6xl font-marcellus text-white mb-4"
+          >
+           Transform your lifestyle through mindful movement.
+          </h1>
+          <div ref={subtitleRef}>
+            <Link 
+              href="#classes"
+              className="inline-block px-6 py-3 border rounded-full border-white/50 text-white font-man uppercase tracking-widest text-xs md:text-md hover:bg-white hover:text-black transition-colors duration-300"
             >
-              Find Your <br /> 
-              <span className="italic">Inner Balance</span>
-            </h1>
-            <p 
-              ref={subtitleRef}
-              className="text-stone-200 text-sm md:text-base font-man uppercase tracking-wide mb-10"
-            >
-              Traditional Hatha Yoga for the modern soul. Join our sanctuary in the heart of the valley.
-            </p>
-            
-            <div className="flex">
-              <Link 
-                href="#classes"
-                className="inline-block px-10 py-4 bg-white text-black text-xs font-man uppercase tracking-widest hover:bg-secondary hover:text-white transition-all duration-500 rounded-full"
-              >
-                Explore Classes
-              </Link>
-            </div>
+              Explore Classes
+            </Link>
           </div>
         </div>
       </section>
-
-      <About />
-
-      <style jsx>{`
-        @keyframes scroll {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(100%); }
-        }
-      `}</style>
+      <About/>
+      <Founder/>
     </MainLayout>
   );
 }

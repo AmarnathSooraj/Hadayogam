@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Manrope, Baskervville } from "next/font/google";
+import { Manrope, Marcellus } from "next/font/google";
 import Navbar from "./components/Navbar";
 import "./globals.css";
 
-const baskervville = Baskervville({
-  variable: "--font-baskervville",
+const marcellus = Marcellus({
+  variable: "--font-marcellus",
   subsets: ["latin"],
   weight: ["400"],
 });
@@ -27,10 +27,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${manrope.variable} ${baskervville.variable} antialiased font-sans`}
+        className={`${manrope.variable} ${marcellus.variable} antialiased font-sans`}
       >
-        <Navbar />
         {children}
+
       </body>
     </html>
   );
