@@ -24,7 +24,7 @@ export default function Founder() {
             Abhilash P.G.
           </h2>
           <p className="text-primary font-man uppercase tracking-[0.2em] text-xs font-semibold">
-            Founder & Lead Therapist
+            Founder & Yoga Teacher
           </p>
         </div>
         

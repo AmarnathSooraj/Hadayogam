@@ -7,6 +7,7 @@ import Image from "next/image";
 import MainLayout from "./layout/MainLayout";
 import About from "./components/sections/About";
 import Founder from "./components/sections/Founder";
+import Services from "./components/sections/Services";
 
 const heroImages = [
   "/img1.jpeg",
@@ -116,6 +117,7 @@ export default function Home() {
       </section>
       <About/>
       <Founder/>
+      <Services/>
     </MainLayout>
   );
 }

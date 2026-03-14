@@ -20,6 +20,9 @@ export default function About() {
             <p>
               Founded by Abhilash P.G., Hadayogam integrates classical Hatha Yoga practices, Yoga Therapy, mindfulness techniques, and traditional Thai bodywork therapies to support physical health, mental clarity, and inner balance.
             </p>
+            <p>
+              Abhilash is an internationally certified and experienced Yoga Teacher and Yoga Therapist with a strong academic and traditional background. His teaching combines the wisdom of classical yogic texts with modern therapeutic understanding, offering personalized guidance for wellness, disease management, and overall well-being.
+            </p>
           </div>
           
           <div className="mt-4">
