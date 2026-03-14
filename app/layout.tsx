@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Manrope, Marcellus } from "next/font/google";
-import Navbar from "./components/Navbar";
 import "./globals.css";
 
 const marcellus = Marcellus({
