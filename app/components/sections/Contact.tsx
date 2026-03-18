@@ -15,7 +15,7 @@ export default function Contact() {
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-marcellus text-stone-800 mb-6">
                 Get in <span className="text-primary italic">Touch</span>
               </h2>
-              <p className="text-lg text-stone-600 font-man leading-relaxed">
+              <p className="text-md md:text-lg text-stone-600 font-man leading-relaxed">
                 Whether you're a beginner or an experienced practitioner, we're here to support your path to wellness. Reach out to start your journey.
               </p>
             </div>
@@ -26,7 +26,7 @@ export default function Contact() {
                   <FiMapPin size={20} />
                 </div>
                 <div>
-                  <h4 className="font-marcellus text-stone-800 text-lg mb-1 uppercase tracking-widest">Location</h4>
+                  <h4 className="font-marcellus text-stone-800 text-md mb-1 uppercase tracking-widest">Location</h4>
                   <p className="font-man text-stone-600">Near Chamundeswary Temple, <br />Guruvayoor, Kerala</p>
                 </div>
               </div>
@@ -36,7 +36,7 @@ export default function Contact() {
                   <FiPhone size={20} />
                 </div>
                 <div>
-                  <h4 className="font-marcellus text-stone-800 text-lg mb-1 uppercase tracking-widest">Call Us</h4>
+                  <h4 className="font-marcellus text-stone-800 text-md mb-1 uppercase tracking-widest">Call Us</h4>
                   <p className="font-man text-stone-600 hover:text-primary transition-colors">
                     <a href="tel:+918075595509">+91 80755 95509</a>
                   </p>
@@ -48,7 +48,7 @@ export default function Contact() {
                   <FiMail size={20} />
                 </div>
                 <div>
-                  <h4 className="font-marcellus text-stone-800 text-lg mb-1 uppercase tracking-widest">Email</h4>
+                  <h4 className="font-marcellus text-stone-800 text-md mb-1 uppercase tracking-widest">Email</h4>
                   <p className="font-man text-stone-600 hover:text-primary transition-colors">
                     <a href="mailto:info@hadayogam.com">info@hadayogam.com</a>
                   </p>
@@ -60,7 +60,7 @@ export default function Contact() {
                   <FiClock size={20} />
                 </div>
                 <div>
-                  <h4 className="font-marcellus text-stone-800 text-lg mb-1 uppercase tracking-widest">Hours</h4>
+                  <h4 className="font-marcellus text-stone-800 text-md mb-1 uppercase tracking-widest">Hours</h4>
                   <p className="font-man text-stone-600">Mon - Sat: 6:00 AM - 8:00 PM <br />Sun: By Appointment</p>
                 </div>
               </div>
