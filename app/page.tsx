@@ -3,11 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import MainLayout from "./layout/MainLayout";
 import About from "./components/sections/About";
 import Founder from "./components/sections/Founder";
 import Services from "./components/sections/Services";
+import Contact from "./components/sections/Contact";
+
+gsap.registerPlugin(useGSAP);
 
 const heroImages = [
   "/img1.jpeg",
@@ -18,11 +22,12 @@ const heroImages = [
 
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const containerRef = useRef(null);
-  const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLDivElement>(null);
   const imagesRef = useRef<(HTMLDivElement | null)[]>([]);
 
+  // Slider timer
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
@@ -31,9 +36,29 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    // Animate image transition
+  // Initial animations
+  useGSAP(() => {
+    const tl = gsap.timeline({ delay: 0.5 });
+    
+    tl.from(titleRef.current, {
+      y: 60,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power4.out",
+    })
+    .from(subtitleRef.current, {
+      y: 30,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+    }, "-=0.8");
+  }, { scope: containerRef });
+
+  // Slider animations
+  useGSAP(() => {
     imagesRef.current.forEach((img, index) => {
+      if (!img) return;
+      
       if (index === currentImageIndex) {
         gsap.to(img, {
           opacity: 1,
@@ -50,28 +75,7 @@ export default function Home() {
         });
       }
     });
-  }, [currentImageIndex]);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.5 });
-      
-      tl.from(titleRef.current, {
-        y: 60,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power4.out",
-      })
-      .from(subtitleRef.current, {
-        y: 30,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-      }, "-=0.8");
-    });
-
-    return () => ctx.revert();
-  }, []);
+  }, { dependencies: [currentImageIndex], scope: containerRef });
 
   return (
     <MainLayout>
@@ -82,7 +86,7 @@ export default function Home() {
             <div
               key={src}
               ref={(el) => { imagesRef.current[index] = el; }}
-              className="absolute inset-0 opacity-0"
+              className="absolute inset-0 opacity-0 pointer-events-none"
               style={{ transform: 'scale(1.05)' }}
             >
               <Image
@@ -118,6 +122,7 @@ export default function Home() {
       <About/>
       <Founder/>
       <Services/>
+      <Contact/>
     </MainLayout>
   );
 }

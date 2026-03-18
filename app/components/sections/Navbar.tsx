@@ -17,32 +17,37 @@ const navItems = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const navRef = useRef(null);
+  const navRef = useRef<HTMLElement>(null);
   const linksRef = useRef<(HTMLAnchorElement | null)[]>([]);
-  const mobileNavRef = useRef(null);
-  const overlayRef = useRef(null);
-  const tl = useRef<gsap.core.Timeline | null>(null);
-
-  useGSAP(() => {
+  const mobileNavRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const menuBtnRef = useRef<HTMLButtonElement>(null);
+  
+  const { contextSafe } = useGSAP(() => {
+    // Initial entry animations
     gsap.set(navRef.current, { y: -80, autoAlpha: 0 });
     gsap.set(linksRef.current, { y: -16, opacity: 0 });
     gsap.set(overlayRef.current, { autoAlpha: 0 });
     gsap.set(mobileNavRef.current, { x: '-100%' });
 
-    gsap.timeline()
-      .to(navRef.current, { y: 0, autoAlpha: 1, duration: 0.9, ease: 'power4.out' })
+    const tl = gsap.timeline();
+    tl.to(navRef.current, { y: 0, autoAlpha: 1, duration: 0.9, ease: 'power4.out' })
       .to(linksRef.current, { y: 0, opacity: 1, duration: 0.7, stagger: 0.08, ease: 'power3.out' }, '-=0.4');
+  }, { scope: navRef });
 
-    tl.current = gsap.timeline({ paused: true })
-      .to(mobileNavRef.current, { x: '0%', duration: 0.45, ease: 'power3.out' }, 0)
-      .to(overlayRef.current, { autoAlpha: 1, duration: 0.45, ease: 'power3.out' }, 0);
-  });
-
-  const toggle = (open: boolean) => {
+  const toggle = contextSafe((open: boolean) => {
     setIsOpen(open);
-    open ? tl.current?.play() : tl.current?.reverse();
-    document.body.style.overflow = open ? 'hidden' : '';
-  };
+    
+    if (open) {
+      gsap.to(mobileNavRef.current, { x: '0%', duration: 0.45, ease: 'power3.out' });
+      gsap.to(overlayRef.current, { autoAlpha: 1, duration: 0.45, ease: 'power3.out' });
+      document.body.style.overflow = 'hidden';
+    } else {
+      gsap.to(mobileNavRef.current, { x: '-100%', duration: 0.4, ease: 'power3.in' });
+      gsap.to(overlayRef.current, { autoAlpha: 0, duration: 0.4, ease: 'power3.in' });
+      document.body.style.overflow = '';
+    }
+  });
 
   return (
     <>
@@ -50,14 +55,12 @@ export default function Navbar() {
       <div
         ref={overlayRef}
         onClick={() => toggle(false)}
-        style={{ visibility: 'hidden', opacity: 0 }}
-        className="fixed inset-0 bg-black/60 z-[40] lg:hidden backdrop-blur-sm"
+        className="fixed inset-0 bg-black/60 z-[40] lg:hidden backdrop-blur-sm invisible opacity-0"
       />
 
       <nav
         ref={navRef}
-        style={{ visibility: 'hidden' }}
-        className="absolute top-0 left-0 right-0 z-50 border-b border-secondary/20"
+        className="absolute top-0 left-0 right-0 z-50 border-b border-secondary/20 invisible opacity-0"
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-center h-auto">
@@ -81,34 +84,26 @@ export default function Navbar() {
             </div>
 
             {/* Hamburger */}
-            {!isOpen && (
-              <button
-                className="md:hidden flex items-center justify-center w-10 font-man h-10 focus:outline-none relative z-[30]"
-                onClick={() => toggle(true)}
-                aria-label="Open menu"
-              >
-                <div className="relative w-6 h-4">
-                  <span
-                    className="absolute top-0 left-0 block w-6 h-0.5 rounded-full bg-primary"
-                  />
-                  <span
-                    className="absolute top-[7px] left-0 block w-6 h-0.5 rounded-full bg-primary"
-                  />
-                  <span
-                    className="absolute bottom-0 left-0 block w-6 h-0.5 rounded-full bg-primary"
-                  />
-                </div>
-              </button>
-            )}
+            <button
+              ref={menuBtnRef}
+              className={`md:hidden flex items-center justify-center w-10 font-man h-10 focus:outline-none relative z-[30] transition-opacity duration-300 ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+              onClick={() => toggle(true)}
+              aria-label="Open menu"
+            >
+              <div className="relative w-6 h-4">
+                <span className="absolute top-0 left-0 block w-6 h-0.5 rounded-full bg-primary" />
+                <span className="absolute top-[7px] left-0 block w-6 h-0.5 rounded-full bg-primary" />
+                <span className="absolute bottom-0 left-0 block w-6 h-0.5 rounded-full bg-primary" />
+              </div>
+            </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Sidebar — outside <nav> to avoid inheriting visibility:hidden */}
+      {/* Mobile Sidebar */}
       <div
         ref={mobileNavRef}
-        style={{ transform: 'translateX(-100%)' }}
-        className="fixed inset-y-0 left-0 w-[70vw] md:w-[75vw] lg:hidden bg-[#f0f0f0] z-[60] flex flex-col shadow-2xl"
+        className="fixed inset-y-0 left-0 w-[70vw] md:w-[75vw] lg:hidden bg-[#f0f0f0] z-[60] flex flex-col shadow-2xl translate-x-[-100%]"
       >
         {/* Sidebar Logo & Close Button */}
         <div className="h-20 flex items-center justify-between border-b border-stone-200 px-6 shrink-0 mb-10">

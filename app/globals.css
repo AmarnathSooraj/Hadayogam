@@ -9,6 +9,8 @@ html {
   --text:black;
   --secondary: #e6b555;
   --bg:#fdf7e4;
+  --primary-glow: color-mix(in srgb, var(--primary) 15%, transparent);
+  --secondary-glow: color-mix(in srgb, var(--secondary) 10%, transparent);
 }
 
 @theme inline {
@@ -24,4 +26,30 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-man), ui-sans-serif, system-ui, sans-serif;
+  position: relative;
+}
+
+/* Subtle Global Noise/Grain Texture */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Background Depth Utilities */
+.bg-soft-glow {
+  background: radial-gradient(circle at 50% 50%, var(--primary-glow) 0%, transparent 70%);
+}
+
+.bg-warm-accent {
+  background: radial-gradient(circle at 20% 30%, var(--secondary-glow) 0%, transparent 50%);
+}
+
+.section-reveal {
+  opacity: 0;
+  transform: translateY(30px);
 }

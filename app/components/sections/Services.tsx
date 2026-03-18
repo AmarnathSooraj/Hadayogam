@@ -52,8 +52,8 @@ export default function Services() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-marcellus text-stone-800 mb-6">
             Our <span className="text-primary">Services</span>
           </h2>
-          <p className="text-lg md:text-xl text-stone-600 leading-relaxed font-man">
-            At Hadayogam Yoga & Thai Bodywork Wellness Center, we offer traditional yogic practices 
+          <p className="text-md md:text-lg text-stone-600 leading-relaxed font-man">
+            At Hadayogam Yoga & Thai Bodywork Wellness Center, we offer traditional yogic practices
             and therapeutic bodywork for holistic well-being.
           </p>
         </div>
@@ -61,11 +61,10 @@ export default function Services() {
         {/* Services List */}
         <div className="max-w-6xl mx-auto space-y-16 md:space-y-24">
           {services.map((service, index) => (
-            <div 
-              key={service.title} 
-              className={`flex flex-col lg:flex-row gap-8 lg:gap-16 items-center ${
-                index % 2 !== 0 ? 'lg:flex-row-reverse' : ''
-              }`}
+            <div
+              key={service.title}
+              className={`flex flex-col lg:flex-row gap-8 lg:gap-16 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''
+                }`}
             >
               {/* Image Side */}
               <div className="w-full lg:w-1/2 relative h-[300px] md:h-[400px] shadow-2xl bg-stone-100 group overflow-hidden">
@@ -87,7 +86,7 @@ export default function Services() {
                 <div className="h-px w-24 bg-primary"></div>
                 <ul className="space-y-2 pt-2">
                   {service.items.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-stone-600 font-man text-base md:text-lg group">
+                    <li key={i} className="flex items-start gap-2 text-stone-600 font-man text-base md:text-md group">
                       <span className="mt-1 shrink-0 text-secondary text-lg leading-none">•</span>
                       <span>{item}</span>
                     </li>
