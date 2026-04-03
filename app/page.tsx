@@ -23,6 +23,8 @@ const heroImages = [
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const hadayogamRef = useRef<HTMLParagraphElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLDivElement>(null);
   const imagesRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -38,20 +40,36 @@ export default function Home() {
 
   // Initial animations
   useGSAP(() => {
-    const tl = gsap.timeline({ delay: 0.5 });
+    const tl = gsap.timeline({ delay: 0.1 });
     
-    tl.from(titleRef.current, {
-      y: 60,
+    tl.from(logoRef.current, {
+      scale: 0.8,
       opacity: 0,
-      duration: 1.2,
-      ease: "power4.out",
+      duration: 0.5,
+      ease: "power1.out",
+      clearProps: "all"
     })
-    .from(subtitleRef.current, {
-      y: 30,
+    .from(hadayogamRef.current, {
+      y: 20,
       opacity: 0,
-      duration: 1,
-      ease: "power3.out",
-    }, "-=0.8");
+      duration: 0.6,
+      ease: "power1.out",
+      clearProps: "all"
+    }, "-=0.3")
+    .from(titleRef.current, {
+      y: 15,
+      opacity: 0,
+      duration: 0.5,
+      ease: "power1.out",
+      clearProps: "all"
+    }, "-=0.3")
+    .from(subtitleRef.current, {
+      y: 10,
+      opacity: 0,
+      duration: 0.4,
+      ease: "power1.out",
+      clearProps: "all"
+    }, "-=0.2");
   }, { scope: containerRef });
 
   // Slider animations
@@ -63,15 +81,17 @@ export default function Home() {
         gsap.to(img, {
           opacity: 1,
           scale: 1,
-          duration: 2.5,
-          ease: "sine.inOut",
+          duration: 1.5,
+          ease: "power2.inOut",
+          overwrite: "auto"
         });
       } else {
         gsap.to(img, {
           opacity: 0,
-          scale: 1.05,
-          duration: 2.5,
-          ease: "sine.inOut",
+          scale: 1.02,
+          duration: 1.5,
+          ease: "power2.inOut",
+          overwrite: "auto"
         });
       }
     });
@@ -79,7 +99,7 @@ export default function Home() {
 
   return (
     <MainLayout>
-      <section ref={containerRef} className="relative h-[100vh] w-full flex items-center justify-center overflow-hidden bg-stone-900">
+      <section ref={containerRef} className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-stone-900">
         {/* Background Images Slider */}
         <div className="absolute inset-0 z-0">
           {heroImages.map((src, index) => (
@@ -102,17 +122,23 @@ export default function Home() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 max-w-4xl mx-auto">
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 max-w-6xl mx-auto">
+          <div ref={logoRef} className="absolute -top-8 md:-top-10 -z-20">
+            <Image src="/landingLogo.png" alt="Hadayogam Logo" width={100} height={100} className="w-20 md:w-38" />
+          </div>
+          <div className="mb-2 md:mb-3">
+            <p ref={hadayogamRef} className="font-dr text-[5rem] md:text-[9rem] text-white">Hadayogam</p>
+          </div>
           <h1 
             ref={titleRef}
-            className="text-3xl md:text-4xl lg:text-6xl font-marcellus text-white mb-4"
+            className="text-xl relative -top-4 md:text-3xl lg:text-4xl font-marcellus text-white mb-4"
           >
-           Transform your lifestyle through mindful movement.
+           Transform your lifestyle through mindful movement for a healthier, more balanced life.
           </h1>
           <div ref={subtitleRef}>
             <Link 
               href="#classes"
-              className="inline-block px-6 py-3 border rounded-full border-white/50 text-white font-man uppercase tracking-widest text-xs md:text-md hover:bg-white hover:text-black transition-colors duration-300"
+              className="inline-block px-6 py-4 border rounded-full border-white/50 text-white font-man uppercase tracking-widest text-xs font-extrabold md:text-md hover:bg-white hover:text-black transition-colors duration-300"
             >
               Explore Classes
             </Link>

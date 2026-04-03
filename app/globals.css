@@ -1,3 +1,5 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Dr+Sugiyama&display=swap');
 @import "tailwindcss";
 
 html {
@@ -9,6 +11,7 @@ html {
   --text:black;
   --secondary: #e6b555;
   --bg:#fdf7e4;
+  --font-dr: 'Dr Sugiyama', cursive;
   --primary-glow: color-mix(in srgb, var(--primary) 15%, transparent);
   --secondary-glow: color-mix(in srgb, var(--secondary) 10%, transparent);
 }
@@ -20,6 +23,7 @@ html {
   --color-bg: var(--bg);
   --font-man: var(--font-manrope);
   --font-marcellus: var(--font-marcellus);
+  --font-dr: var(--font-dr);
 }
 
 body {

@@ -39,12 +39,12 @@ export default function Navbar() {
     setIsOpen(open);
     
     if (open) {
-      gsap.to(mobileNavRef.current, { x: '0%', duration: 0.45, ease: 'power3.out' });
-      gsap.to(overlayRef.current, { autoAlpha: 1, duration: 0.45, ease: 'power3.out' });
+      gsap.to(mobileNavRef.current, { x: '0%', duration: 0.45, ease: 'power3.out', overwrite: true });
+      gsap.to(overlayRef.current, { autoAlpha: 1, duration: 0.45, ease: 'power3.out', overwrite: true });
       document.body.style.overflow = 'hidden';
     } else {
-      gsap.to(mobileNavRef.current, { x: '-100%', duration: 0.4, ease: 'power3.in' });
-      gsap.to(overlayRef.current, { autoAlpha: 0, duration: 0.4, ease: 'power3.in' });
+      gsap.to(mobileNavRef.current, { x: '-100%', duration: 0.4, ease: 'power3.inOut', overwrite: true });
+      gsap.to(overlayRef.current, { autoAlpha: 0, duration: 0.4, ease: 'power3.inOut', overwrite: true });
       document.body.style.overflow = '';
     }
   });
@@ -55,7 +55,11 @@ export default function Navbar() {
       <div
         ref={overlayRef}
         onClick={() => toggle(false)}
-        className="fixed inset-0 bg-black/60 z-[40] lg:hidden backdrop-blur-sm invisible opacity-0"
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') toggle(false); }}
+        role="button"
+        tabIndex={0}
+        aria-label="Close overlay"
+        className="fixed inset-0 bg-black/60 z-40 lg:hidden backdrop-blur-sm invisible opacity-0"
       />
 
       <nav
@@ -86,13 +90,13 @@ export default function Navbar() {
             {/* Hamburger */}
             <button
               ref={menuBtnRef}
-              className={`md:hidden flex items-center justify-center w-10 font-man h-10 focus:outline-none relative z-[30] transition-opacity duration-300 ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+              className={`md:hidden flex items-center justify-center w-10 font-man h-10 focus:outline-none relative z-30 transition-opacity duration-300 ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
               onClick={() => toggle(true)}
               aria-label="Open menu"
             >
               <div className="relative w-6 h-4">
                 <span className="absolute top-0 left-0 block w-6 h-0.5 rounded-full bg-primary" />
-                <span className="absolute top-[7px] left-0 block w-6 h-0.5 rounded-full bg-primary" />
+                <span className="absolute top-1.75 left-0 block w-6 h-0.5 rounded-full bg-primary" />
                 <span className="absolute bottom-0 left-0 block w-6 h-0.5 rounded-full bg-primary" />
               </div>
             </button>
@@ -103,7 +107,7 @@ export default function Navbar() {
       {/* Mobile Sidebar */}
       <div
         ref={mobileNavRef}
-        className="fixed inset-y-0 left-0 w-[70vw] md:w-[75vw] lg:hidden bg-[#f0f0f0] z-[60] flex flex-col shadow-2xl translate-x-[-100%]"
+        className="fixed inset-y-0 left-0 w-[70vw] md:w-[75vw] lg:hidden bg-[#f0f0f0] z-60 flex flex-col shadow-2xl -translate-x-full"
       >
         {/* Sidebar Logo & Close Button */}
         <div className="h-20 flex items-center justify-between border-b border-stone-200 px-6 shrink-0 mb-10">
@@ -123,7 +127,7 @@ export default function Navbar() {
         </div>
 
         {/* Nav Items */}
-        <div className="flex flex-col flex-grow font-sans uppercase overflow-y-auto">
+        <div className="flex flex-col grow font-sans uppercase overflow-y-auto">
           {navItems.map((item) => (
             <Link
               key={item.name}

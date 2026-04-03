@@ -48,8 +48,8 @@ export default function Footer() {
               </li>
               <li className="flex flex-col items-center md:items-start">
                 <span className="text-primary uppercase tracking-widest text-xs mb-1.5 font-semibold">Contact</span>
-                <a href="tel:+910000000000" className="hover:text-primary transition-colors duration-300 mb-1">+91 00000 00000</a>
-                <a href="mailto:info@hadayogam.com" className="hover:text-primary transition-colors duration-300">info@hadayogam.com</a>
+                <a href="tel:+918590813596" className="hover:text-primary transition-colors duration-300 mb-1">+91 85908 13596</a>
+                <a href="mailto:hadayogam@gmail.com" className="hover:text-primary transition-colors duration-300">hadayogam@gmail.com</a>
               </li>
             </ul>
           </div>

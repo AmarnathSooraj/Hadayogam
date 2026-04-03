@@ -4,7 +4,10 @@ import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
@@ -104,11 +107,58 @@ export default function Services() {
   useGSAP(() => {
     if (!containerRef.current) return;
 
+    // Header animation
+    gsap.from(containerRef.current.querySelector('.services-header'), {
+      y: 60,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power4.out",
+      scrollTrigger: {
+        trigger: containerRef.current.querySelector('.services-header'),
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      }
+    });
+
+    // Row animations
+    const rows = gsap.utils.toArray<HTMLElement>('.service-row');
+    rows.forEach((row, i) => {
+      const image = row.querySelector('.image-col');
+      const content = row.querySelector('.content-col');
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: row,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        }
+      });
+
+      tl.from(image, {
+        y: 20,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power1.out",
+        clearProps: "all"
+      })
+      .from(content, {
+        y: 15,
+        opacity: 0,
+        duration: 0.4,
+        ease: "power1.out",
+        clearProps: "all"
+      }, "-=0.3");
+    });
+  }, { scope: containerRef });
+
+  useGSAP(() => {
+    if (!containerRef.current) return;
+
     // Find all item descriptions in the section
     const descs = gsap.utils.toArray<HTMLElement>('.service-item-desc');
 
     descs.forEach((desc) => {
-      const isExpanded = desc.getAttribute('data-name') === activeItem;
+      const isExpanded = desc.dataset.name === activeItem;
 
       gsap.to(desc, {
         height: isExpanded ? 'auto' : 0,
@@ -125,7 +175,7 @@ export default function Services() {
     <section className="bg-bg text-stone-900 py-16 md:py-24" id="classes" ref={containerRef}>
       <div className="container mx-auto px-6">
         {/* Header Section */}
-        <div className="text-center max-w-4xl mx-auto mb-16 md:mb-24">
+        <div className="services-header text-center max-w-4xl mx-auto mb-16 md:mb-24">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-marcellus text-stone-800 mb-6">
             Our <span className="text-primary">Services</span>
           </h2>
@@ -142,11 +192,11 @@ export default function Services() {
           {services.map((service, index) => (
             <div
               key={service.title}
-              className={`flex flex-col lg:flex-row gap-12 lg:gap-20 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''
+              className={`service-row flex flex-col lg:flex-row gap-12 lg:gap-20 items-center ${index % 2 === 0 ? '' : 'lg:flex-row-reverse'
                 }`}
             >
               {/* Image Side - Reduced Size to 5/12 */}
-              <div className="w-full lg:w-5/12 relative h-[350px] md:h-[400px] lg:h-[450px] shadow-2xl bg-stone-100 group overflow-hidden rounded-sm">
+              <div className="image-col w-full lg:w-5/12 relative h-87.5 md:h-100 lg:h-112.5 shadow-2xl bg-stone-100 group overflow-hidden rounded-sm">
                 <Image
                   src={service.image}
                   alt={service.title}
@@ -158,7 +208,7 @@ export default function Services() {
               </div>
 
               {/* Content Side - Increased Size to 7/12 */}
-              <div className="w-full lg:w-7/12 flex flex-col justify-center space-y-8 md:px-4 lg:px-0">
+              <div className="content-col w-full lg:w-7/12 flex flex-col justify-center space-y-8 md:px-4 lg:px-0">
                 <div className="space-y-4">
                   <h3 className="text-2xl md:text-3xl font-marcellus text-stone-800">
                     {service.title}
@@ -167,9 +217,9 @@ export default function Services() {
                 </div>
 
                 <div className="space-y-4">
-                  {service.items.map((item, i) => (
+                  {service.items.map((item) => (
                     <div
-                      key={i}
+                      key={item.name}
                       className={`border-b border-stone-200 last:border-0 pb-2 last:pb-0 transition-all duration-300 ${activeItem === item.name ? 'p-3 rounded-md bg-stone-50' : ''}`}
                     >
                       <button

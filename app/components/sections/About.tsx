@@ -1,13 +1,51 @@
-import React from 'react';
+'use client';
+
+import React, { useRef } from 'react';
 import Image from 'next/image';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!contentRef.current) return;
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      }
+    });
+
+    tl.from(imageRef.current, {
+      y: 20,
+      opacity: 0,
+      duration: 0.5,
+      ease: "power1.out",
+      clearProps: "all"
+    })
+    .from(contentRef.current.querySelectorAll('h2, p'), {
+      y: 15,
+      opacity: 0,
+      duration: 0.4,
+      stagger: 0.05,
+      ease: "power1.out",
+      clearProps: "all"
+    }, "-=0.4");
+  }, { scope: sectionRef });
+
   return (
-    <section id="about" className="py-16 md:py-20 px-4 md:px-8 lg:px-12 bg-bg text-stone-900 overflow-hidden">
+    <section ref={sectionRef} id="about" className="py-16 md:py-20 px-4 md:px-8 lg:px-12 bg-bg text-stone-900 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
 
         {/* Content Side */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-center order-1 lg:order-2">
+        <div ref={contentRef} className="w-full lg:w-1/2 flex flex-col justify-center order-1 lg:order-2">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-marcellus mb-4 leading-[1.15] text-stone-800">
             About <br className="hidden md:block" />
             <span className="text-primary">Hadayogam</span>
@@ -24,17 +62,10 @@ export default function About() {
               Abhilash is an internationally certified and experienced Yoga Teacher and Yoga Therapist with a strong academic and traditional background. His teaching combines the wisdom of classical yogic texts with modern therapeutic understanding, offering personalized guidance for wellness, disease management, and overall well-being.
             </p>
           </div>
-
-          {/* <div className="mt-4">
-            <button className="relative overflow-hidden group px-8 py-4 border border-primary text-primary font-man uppercase tracking-widest text-xs transition-colors duration-500">
-              <span className="relative z-10 group-hover:text-bg transition-colors duration-500">Read Our Full Story</span>
-              <div className="absolute inset-0 bg-primary transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-in-out z-0"></div>
-            </button>
-          </div> */}
         </div>
 
         {/* Image Side */}
-        <div className="relative w-full lg:w-1/2 h-[400px] md:h-[550px] order-2 lg:order-1">
+        <div ref={imageRef} className="relative w-full lg:w-1/2 h-100 md:h-137.5 order-2 lg:order-1">
 
           {/* Main Image Container */}
           <div className="relative w-full h-full overflow-hidden shadow-2xl z-10 bg-stone-100 group">
