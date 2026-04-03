@@ -126,12 +126,14 @@ export default function Home() {
           <div ref={logoRef} className="absolute -top-8 md:-top-10 -z-20">
             <Image src="/landingLogo.png" alt="Hadayogam Logo" width={100} height={100} className="w-20 md:w-38" />
           </div>
-          <div className="mb-2 md:mb-3">
-            <p ref={hadayogamRef} className="font-dr text-[5rem] md:text-[9rem] text-white">Hadayogam</p>
+          <div className="mb-2"
+            ref={hadayogamRef}>
+            <p className="font-dr text-[5rem] md:text-[9rem] text-white">Hadayogam</p>
+            <p className="text-stone-300 font-man text-sm md:text-lg lg:text-xl mb-8 -top-2 relative tracking-wide opacity-90">A sanctuary for yoga, meditation, and holistic wellness.</p>
           </div>
           <h1 
             ref={titleRef}
-            className="text-xl relative -top-4 md:text-3xl lg:text-4xl font-marcellus text-white mb-4"
+            className="text-xl relative -top-4 md:text-3xl lg:text-4xl font-marcellus text-white mb-2"
           >
            Transform your lifestyle through mindful movement for a healthier, more balanced life.
           </h1>

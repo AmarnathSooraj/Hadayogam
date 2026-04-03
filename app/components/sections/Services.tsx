@@ -13,10 +13,11 @@ const services = [
   {
     title: 'Yoga Programs',
     image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop',
+    icon: '/icons/lotus.png',
     items: [
       {
         name: 'Hatha Yoga Regular Wellness Classes',
-        description: 'A structured and traditional practice focusing on asana, breath awareness, and relaxation to improve flexibility, strength, and overall well-being.'
+        description: 'A structured and traditional practice focusing on asana, breath awareness, and relaxation to improve flexibility, strength, and overall well-eight.'
       },
       {
         name: 'Yoga Therapy',
@@ -39,6 +40,7 @@ const services = [
   {
     title: 'Mind & Yogic Philosophy',
     image: 'https://images.unsplash.com/photo-1528319725582-ddc096101511?q=80&w=1200&auto=format&fit=crop',
+    icon: '/icons/meditation.png',
     items: [
       {
         name: 'Mind Management Techniques based on Yoga Sutra',
@@ -53,6 +55,7 @@ const services = [
   {
     title: 'Traditional Yogic Practices',
     image: 'https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7?q=80&w=1200&auto=format&fit=crop',
+    icon: '/icons/ritual.png',
     items: [
       {
         name: 'Shatkarma (Yogic Cleansing Techniques)',
@@ -71,6 +74,7 @@ const services = [
   {
     title: 'Thai Bodywork Therapies',
     image: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1200&auto=format&fit=crop',
+    icon: '/icons/chakra.png',
     items: [
       {
         name: 'Traditional Thai Massage Therapy',
@@ -210,9 +214,19 @@ export default function Services() {
               {/* Content Side - Increased Size to 7/12 */}
               <div className="content-col w-full lg:w-7/12 flex flex-col justify-center space-y-8 md:px-4 lg:px-0">
                 <div className="space-y-4">
-                  <h3 className="text-2xl md:text-3xl font-marcellus text-stone-800">
-                    {service.title}
-                  </h3>
+                  <div className="flex items-center gap-4">
+                    <div className="w-14 h-14 relative shrink-0">
+                      <Image
+                        src={service.icon}
+                        alt=""
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-marcellus text-stone-800">
+                      {service.title}
+                    </h3>
+                  </div>
                   <div className="h-px w-24 bg-primary mb-2"></div>
                 </div>
 

@@ -40,6 +40,20 @@ export default function Contact() {
     }, "-=0.3");
   }, { scope: sectionRef });
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const subject = formData.get('subject');
+    const message = formData.get('message');
+
+    const whatsappMessage = `*New Inquiry from Hadayogam Website*%0A%0A*Name:* ${name}%0A*Email:* ${email}%0A*Subject:* ${subject}%0A*Message:* ${message}`;
+    const whatsappUrl = `https://wa.me/918590813596?text=${whatsappMessage}`;
+
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
     <section ref={sectionRef} id="contact" className="py-16 md:py-24 bg-bg text-stone-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
@@ -108,13 +122,15 @@ export default function Contact() {
             {/* Design Element */}
             <div className="absolute -top-12 -right-12 w-48 h-48 bg-primary/5 rounded-full blur-3xl"></div>
 
-            <form className="relative z-10 space-y-6">
+            <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="name" className="block text-xs font-man uppercase tracking-widest text-stone-500 font-semibold">Full Name</label>
                   <input
                     type="text"
                     id="name"
+                    name="name"
+                    required
                     placeholder="Your Name"
                     className="w-full bg-transparent border-b border-stone-300 py-3 font-man text-stone-800 focus:outline-none focus:border-primary transition-colors"
                   />
@@ -124,6 +140,8 @@ export default function Contact() {
                   <input
                     type="email"
                     id="email"
+                    name="email"
+                    required
                     placeholder="example@mail.com"
                     className="w-full bg-transparent border-b border-stone-300 py-3 font-man text-stone-800 focus:outline-none focus:border-primary transition-colors"
                   />
@@ -135,6 +153,8 @@ export default function Contact() {
                 <input
                   type="text"
                   id="subject"
+                  name="subject"
+                  required
                   placeholder="Inquiry about..."
                   className="w-full bg-transparent border-b border-stone-300 py-3 font-man text-stone-800 focus:outline-none focus:border-primary transition-colors"
                 />
@@ -144,6 +164,8 @@ export default function Contact() {
                 <label htmlFor="message" className="block text-xs font-man uppercase tracking-widest text-stone-500 font-semibold">Message</label>
                 <textarea
                   id="message"
+                  name="message"
+                  required
                   rows={4}
                   placeholder="How can we help you?"
                   className="w-full bg-transparent border-b border-stone-300 py-3 font-man text-stone-800 focus:outline-none focus:border-primary transition-colors resize-none"
