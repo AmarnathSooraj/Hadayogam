@@ -47,6 +47,7 @@ export default function Home() {
       opacity: 0,
       duration: 0.5,
       ease: "power1.out",
+      force3D: true,
       clearProps: "all"
     })
     .from(hadayogamRef.current, {
@@ -54,6 +55,7 @@ export default function Home() {
       opacity: 0,
       duration: 0.6,
       ease: "power1.out",
+      force3D: true,
       clearProps: "all"
     }, "-=0.3")
     .from(titleRef.current, {
@@ -61,6 +63,7 @@ export default function Home() {
       opacity: 0,
       duration: 0.5,
       ease: "power1.out",
+      force3D: true,
       clearProps: "all"
     }, "-=0.3")
     .from(subtitleRef.current, {
@@ -68,6 +71,7 @@ export default function Home() {
       opacity: 0,
       duration: 0.4,
       ease: "power1.out",
+      force3D: true,
       clearProps: "all"
     }, "-=0.2");
   }, { scope: containerRef });
@@ -83,6 +87,7 @@ export default function Home() {
           scale: 1,
           duration: 1.5,
           ease: "power2.inOut",
+          force3D: true,
           overwrite: "auto"
         });
       } else {
@@ -91,6 +96,7 @@ export default function Home() {
           scale: 1.02,
           duration: 1.5,
           ease: "power2.inOut",
+          force3D: true,
           overwrite: "auto"
         });
       }
@@ -138,12 +144,15 @@ export default function Home() {
            Transform your lifestyle through mindful movement for a healthier, more balanced life.
           </h1>
           <div ref={subtitleRef}>
-            <Link 
-              href="#classes"
+            <button 
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('classes')?.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="inline-block px-6 py-4 border rounded-full border-white/50 text-white font-man uppercase tracking-widest text-xs font-extrabold md:text-md hover:bg-white hover:text-black transition-colors duration-300"
             >
               Explore Classes
-            </Link>
+            </button>
           </div>
         </div>
       </section>

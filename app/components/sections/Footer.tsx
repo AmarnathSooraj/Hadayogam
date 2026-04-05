@@ -16,9 +16,14 @@ export default function Footer() {
               Hadayogam
             </h3>
             <div className="w-12 h-px bg-primary/50 mb-6"></div>
-            <p className="leading-relaxed text-stone-400 text-sm md:text-base">
+            <p className="leading-relaxed text-stone-400 text-sm md:text-base mb-6">
               A sanctuary for authentic Yoga, therapeutic bodywork, and mindful living. Embark on a profound journey into discovering your most authentic, balanced self.
             </p>
+            <div className="flex flex-col space-y-2 text-stone-400 text-xs md:text-sm">
+              <p><span className="text-primary font-semibold">Kswift:</span> KLMSME-3669/2026</p>
+              <p><span className="text-primary font-semibold">MSME:</span> UDYAM-KL-13-0012446</p>
+              <p><span className="text-primary font-semibold">Charitable Trust:</span> Reg no 56/2023</p>
+            </div>
           </div>
 
           {/* Quick Links */}

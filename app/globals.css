@@ -4,6 +4,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 :root {
@@ -31,6 +32,20 @@ body {
   color: var(--text);
   font-family: var(--font-man), ui-sans-serif, system-ui, sans-serif;
   position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
 }
 
 /* Subtle Global Noise/Grain Texture */
@@ -48,6 +63,17 @@ body::after {
 .bg-soft-glow {
   background: radial-gradient(circle at 50% 50%, var(--primary-glow) 0%, transparent 70%);
 }
+
+@keyframes loader-slide {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-loader-slide {
+  animation: loader-slide 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
 
 .bg-warm-accent {
   background: radial-gradient(circle at 20% 30%, var(--secondary-glow) 0%, transparent 50%);

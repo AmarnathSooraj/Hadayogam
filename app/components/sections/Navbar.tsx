@@ -49,6 +49,21 @@ export default function Navbar() {
     }
   });
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        if (isOpen) toggle(false);
+      }
+    } else if (href === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (isOpen) toggle(false);
+    }
+  };
+
   return (
     <>
       {/* Overlay */}
@@ -80,6 +95,7 @@ export default function Navbar() {
                   key={item.name}
                   href={item.href}
                   ref={(el) => { linksRef.current[index] = el; }}
+                  onClick={(e) => handleNavClick(e, item.href)}
                   className="transition-colors font-medium hover:opacity-60"
                 >
                   {item.name}
@@ -133,7 +149,7 @@ export default function Navbar() {
               key={item.name}
               href={item.href}
               className="group relative text-[0.95em] font-medium tracking-tight text-stone-600 hover:text-stone-900 transition-all duration-300 w-full py-5 px-8 border-b border-stone-200"
-              onClick={() => toggle(false)}
+              onClick={(e) => handleNavClick(e, item.href)}
             >
               <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-2 inline-block">
                 {item.name}

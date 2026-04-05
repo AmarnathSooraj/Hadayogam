@@ -28,6 +28,7 @@ export default function Founder() {
       opacity: 0,
       duration: 0.4,
       ease: "power1.out",
+      force3D: true,
       clearProps: "all"
     })
     .from(contentRef.current.querySelectorAll('h2, p, .text-primary'), {
@@ -36,6 +37,7 @@ export default function Founder() {
       duration: 0.4,
       stagger: 0.05,
       ease: "power1.out",
+      force3D: true,
       clearProps: "all"
     }, "-=0.3");
   }, { scope: sectionRef });
@@ -51,7 +53,8 @@ export default function Founder() {
               src="/founder.webp"
               alt="Abhilash P.G. - Founder"
               fill
-              className="object-cover"
+              className="object-cover select-none pointer-events-none"
+              draggable={false}
             />
           </div>
         </div>
@@ -62,13 +65,19 @@ export default function Founder() {
             Abhilash P.G.
           </h2>
           <p className="text-primary font-man uppercase tracking-[0.2em] text-xs font-semibold">
-            Founder & Yoga Teacher
+            Founder & Yoga Therapist | Holistic Wellness Practitioner
           </p>
           
           {/* Main Quote / Philosophy */}
-          <div className="relative w-full max-w-4xl px-4 md:px-0 mt-8">
+          <div className="relative w-full max-w-4xl px-4 md:px-0 mt-8 space-y-6">
             <p className="relative z-10 text-md md:text-lg font-marcellus text-stone-800 text-center">
-              At Hadayogam, the approach focuses on authentic practice, therapeutic care, and conscious lifestyle transformation, helping individuals cultivate strength, flexibility, mental stability, and deeper awareness.
+              Abhilash P.G. is a highly trained yoga professional and holistic wellness practitioner, blending deep traditional knowledge with modern scientific understanding. With an MSc in Yoga and a BSc in Psychology, he brings a unique, integrative approach to mind-body wellness and mental well-being.
+            </p>
+            <p className="relative z-10 text-md md:text-lg font-marcellus text-stone-800 text-center">
+              Internationally certified with TTC 200 and ATTC 300 under Yoga Alliance (UK), he is also recognized by the Ministry of AYUSH, Government of India. His expertise extends to advanced therapeutic practices, including Thai Royal Massage Therapy and Mindfulness-Based Stress Reduction (MBSR).
+            </p>
+            <p className="relative z-10 text-md md:text-lg font-marcellus text-stone-800 text-center">
+              At Hadayogam, his approach focuses on holistic healing—addressing physical health, mental clarity, and inner balance. By combining classical yogic wisdom with insights into human behavior, he guides individuals toward a more conscious and harmonious lifestyle.
             </p>
           </div>
         </div>
