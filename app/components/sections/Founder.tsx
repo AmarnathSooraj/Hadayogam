@@ -71,13 +71,16 @@ export default function Founder() {
           {/* Main Quote / Philosophy */}
           <div className="relative w-full max-w-4xl px-4 md:px-0 mt-8 space-y-6">
             <p className="relative z-10 text-md md:text-lg font-marcellus text-stone-800 text-center">
-              Abhilash P.G. is a highly trained yoga professional and holistic wellness practitioner, blending deep traditional knowledge with modern scientific understanding. With an MSc in Yoga and a BSc in Psychology, he brings a unique, integrative approach to mind-body wellness and mental well-being.
+              Abhilash P.G is a highly trained yoga professional and holistic wellness practitioner, blending deep traditional knowledge with modern scientific understanding. With an MSc in Yoga and a BSc in Psychology, he brings a unique, integrative approach to mind-body wellness and mental well-being.
             </p>
             <p className="relative z-10 text-md md:text-lg font-marcellus text-stone-800 text-center">
-              Internationally certified with TTC 200 and ATTC 300 under Yoga Alliance (UK), he is also recognized by the Ministry of AYUSH, Government of India. His expertise extends to advanced therapeutic practices, including Thai Royal Massage Therapy and Mindfulness-Based Stress Reduction (MBSR).
+              Internationally certified (TTC 200 & ATTC 300) under Yoga Alliance (UK) and recognized by the Ministry of AYUSH, Government of India, as a Yoga Wellness Instructor (Level 2) and Yoga Protocol Instructor.
             </p>
             <p className="relative z-10 text-md md:text-lg font-marcellus text-stone-800 text-center">
-              At Hadayogam, his approach focuses on holistic healing—addressing physical health, mental clarity, and inner balance. By combining classical yogic wisdom with insights into human behavior, he guides individuals toward a more conscious and harmonious lifestyle.
+              His extensive training includes a Diploma in Thai Massage Therapy, specialized training in Thai Royal Massage Therapy (Bangkok), a Certificate in CYP (K-DAM Program), advanced studies in Tantra Philosophy, and a Certificate Course in Parapsychology.
+            </p>
+            <p className="relative z-10 text-md md:text-lg font-marcellus text-stone-800 text-center">
+              A practitioner of classical meditation and certified in MBSR, Abhilash focuses on holistic healing—addressing physical health, mental clarity, and inner balance to guide individuals toward a conscious and harmonious lifestyle.
             </p>
           </div>
         </div>
