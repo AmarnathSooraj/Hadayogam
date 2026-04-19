@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 const services = [
   {
     title: 'Yoga Programs',
-    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop',
+    image: '/services/sun.jpeg',
     icon: '/icons/lotus.png',
     items: [
       {
@@ -39,7 +39,7 @@ const services = [
   },
   {
     title: 'Mind & Yogic Philosophy',
-    image: 'https://images.unsplash.com/photo-1528319725582-ddc096101511?q=80&w=1200&auto=format&fit=crop',
+    image: '/services/mind.jpeg',
     icon: '/icons/meditation.png',
     items: [
       {
@@ -73,7 +73,7 @@ const services = [
   },
   {
     title: 'Thai Bodywork Therapies',
-    image: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1200&auto=format&fit=crop',
+    image: '/services/thai.jpeg',
     icon: '/icons/chakra.png',
     items: [
       {
@@ -196,23 +196,23 @@ export default function Services() {
           {services.map((service, index) => (
             <div
               key={service.title}
-              className={`service-row flex flex-col lg:flex-row gap-12 lg:gap-20 items-center ${index % 2 === 0 ? '' : 'lg:flex-row-reverse'
+              className={`service-row flex flex-col lg:flex-row gap-8 lg:gap-20 items-center ${index % 2 === 0 ? '' : 'lg:flex-row-reverse'
                 }`}
             >
-              {/* Image Side - Reduced Size to 5/12 */}
-              <div className="image-col w-full lg:w-5/12 relative h-87.5 md:h-100 lg:h-112.5 shadow-2xl bg-stone-100 group overflow-hidden rounded-sm">
+              {/* Image Side - Balanced for Mobile and Desktop */}
+              <div className="image-col w-full sm:w-10/12 md:w-8/12 lg:w-4/12 relative aspect-[4/3] sm:aspect-square lg:aspect-auto lg:h-96 shadow-2xl bg-stone-100 group overflow-hidden rounded-br-[4rem] rounded-tl-[2rem]">
                 <Image
                   src={service.image}
                   alt={service.title}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
-                  sizes="(max-width: 768px) 100vw, 40vw"
+                  sizes="(max-width: 640px) 90vw, (max-width: 1024px) 60vw, 30vw"
                 />
                 <div className="absolute inset-0 bg-stone-900/10 mix-blend-multiply"></div>
               </div>
 
-              {/* Content Side - Increased Size to 7/12 */}
-              <div className="content-col w-full lg:w-7/12 flex flex-col justify-center space-y-8 md:px-4 lg:px-0">
+              {/* Content Side - Increased Size to 8/12 */}
+              <div className="content-col w-full lg:w-8/12 flex flex-col justify-center space-y-8 lg:px-0">
                 <div className="space-y-4">
                   <div className="flex items-center gap-4">
                     <div className="w-14 h-14 relative shrink-0">

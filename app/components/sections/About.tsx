@@ -70,7 +70,7 @@ export default function About() {
           {/* Main Image Container */}
           <div className="relative w-full h-full overflow-hidden shadow-2xl z-10 bg-stone-100 group">
             <Image
-              src="/img1.jpeg"
+              src="/hada.jpeg"
               alt="Hadayogam Wellness"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
