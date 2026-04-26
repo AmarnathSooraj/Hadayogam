@@ -46,35 +46,35 @@ export default function Home() {
     tl.from(logoRef.current, {
       scale: 0.8,
       opacity: 0,
-      duration: 0.5,
+      duration: 0.4,
       ease: "power1.out",
       force3D: true,
       clearProps: "all"
     })
     .from(hadayogamRef.current, {
-      y: 20,
-      opacity: 0,
-      duration: 0.6,
-      ease: "power1.out",
-      force3D: true,
-      clearProps: "all"
-    }, "-=0.3")
-    .from(titleRef.current, {
       y: 15,
       opacity: 0,
       duration: 0.5,
       ease: "power1.out",
       force3D: true,
       clearProps: "all"
-    }, "-=0.3")
-    .from(subtitleRef.current, {
+    }, "-=0.2")
+    .from(titleRef.current, {
       y: 10,
       opacity: 0,
       duration: 0.4,
       ease: "power1.out",
       force3D: true,
       clearProps: "all"
-    }, "-=0.2");
+    }, "-=0.2")
+    .from(subtitleRef.current, {
+      y: 8,
+      opacity: 0,
+      duration: 0.3,
+      ease: "power1.out",
+      force3D: true,
+      clearProps: "all"
+    }, "-=0.15");
   }, { scope: containerRef });
 
   // Slider animations

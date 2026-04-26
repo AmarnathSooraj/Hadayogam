@@ -6,17 +6,7 @@ import MainLayout from "../layout/MainLayout";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-const galleryImages = [
-  { src: "/img1.jpeg", alt: "Hadayogam Yoga Session 1", category: "Yoga" },
-  { src: "/img2.jpeg", alt: "Hadayogam Yoga Session 2", category: "Yoga" },
-  { src: "/img3.jpeg", alt: "Hadayogam Yoga Session 3", category: "Therapy" },
-  { src: "/img4.jpeg", alt: "Hadayogam Yoga Session 4", category: "Meditation" },
-  { src: "/hada.jpeg", alt: "Hadayogam Wellness Centre", category: "Centre" },
-  { src: "/hadayogam.jpeg", alt: "Yoga Practice", category: "Yoga" },
-  { src: "/services/sun.jpeg", alt: "Outdoor Yoga", category: "Yoga" },
-  { src: "/services/mind.jpeg", alt: "Meditation Practice", category: "Meditation" },
-  { src: "/services/thai.jpeg", alt: "Thai Massage Therapy", category: "Therapy" },
-];
+const galleryImages = [];
 
 export default function GalleryPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -81,37 +71,12 @@ export default function GalleryPage() {
               balance, and transformation.
             </p>
           </div>
-
-          {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[400px]">
-            {galleryImages.length > 0 ? (
-              galleryImages.map((image) => (
-                <div
-                  key={image.src}
-                  className="gallery-item relative aspect-[4/5] cursor-pointer group overflow-hidden bg-stone-100 rounded-sm"
-                  onClick={() => setSelectedImage(image.src)}
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="text-white font-man uppercase tracking-[0.2em] text-xs">View Image</span>
-                  </div>
-                </div>
-              ))
-            ) : (
               <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
                 <p className="text-stone-400 font-man text-lg italic">
                   No images found
                 </p>
               </div>
-            )}
           </div>
-        </div>
 
         {/* Lightbox */}
         {selectedImage && (
