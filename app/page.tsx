@@ -9,6 +9,7 @@ import MainLayout from "./layout/MainLayout";
 import About from "./components/sections/About";
 import Founder from "./components/sections/Founder";
 import Services from "./components/sections/Services";
+import FAQs from "./components/sections/faqs";
 import Contact from "./components/sections/Contact";
 
 gsap.registerPlugin(useGSAP);
@@ -159,6 +160,7 @@ export default function Home() {
       <About/>
       <Founder/>
       <Services/>
+      <FAQs />
       <Contact/>
     </MainLayout>
   );

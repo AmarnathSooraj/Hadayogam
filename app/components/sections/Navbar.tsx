@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 gsap.registerPlugin(useGSAP);
 
@@ -12,16 +13,36 @@ const navItems = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '#about' },
   { name: 'Classes', href: '#classes' },
+  { name: 'Gallery', href: '/gallery' },
+  { name: 'FAQs', href: '#faqs' },
   { name: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const isGalleryPage = pathname === '/gallery';
   const navRef = useRef<HTMLElement>(null);
   const linksRef = useRef<(HTMLAnchorElement | null)[]>([]);
   const mobileNavRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const menuBtnRef = useRef<HTMLButtonElement>(null);
+
+  const isScrolledStyle = isScrolled;
+  const textColor = isScrolledStyle ? "text-white" : (isGalleryPage ? "text-stone-800" : "text-white/70");
+  const mobileMenuColor = isScrolledStyle ? "bg-primary" : (isGalleryPage ? "bg-stone-800" : "bg-primary");
+  const navBackground = isScrolledStyle 
+    ? "bg-black/20 backdrop-blur-md shadow-sm" 
+    : "bg-transparent";
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
   const { contextSafe } = useGSAP(() => {
     // Initial entry animations
@@ -79,7 +100,9 @@ export default function Navbar() {
 
       <nav
         ref={navRef}
-        className="absolute top-0 left-0 right-0 z-50 border-b border-secondary/20 invisible opacity-0"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 invisible opacity-0 ${
+          isScrolled ? "py-1" : "py-2"
+        } ${navBackground}`}
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-center h-auto">
@@ -89,14 +112,14 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Links */}
-            <div className="hidden md:flex items-center space-x-10 text-[0.85em] font-man uppercase tracking-tigher text-white/70">
+            <div className={`hidden md:flex items-center space-x-10 text-[0.85em] font-man uppercase tracking-wider ${textColor}`}>
               {navItems.map((item, index) => (
                 <Link
                   key={item.name}
                   href={item.href}
                   ref={(el) => { linksRef.current[index] = el; }}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className="transition-colors font-medium hover:opacity-60"
+                  className="transition-colors font-semibold hover:opacity-60"
                 >
                   {item.name}
                 </Link>
@@ -111,9 +134,9 @@ export default function Navbar() {
               aria-label="Open menu"
             >
               <div className="relative w-6 h-4">
-                <span className="absolute top-0 left-0 block w-6 h-0.5 rounded-full bg-primary" />
-                <span className="absolute top-1.75 left-0 block w-6 h-0.5 rounded-full bg-primary" />
-                <span className="absolute bottom-0 left-0 block w-6 h-0.5 rounded-full bg-primary" />
+                <span className={`absolute top-0 left-0 block w-6 h-0.5 rounded-full ${mobileMenuColor}`} />
+                <span className={`absolute top-1.75 left-0 block w-6 h-0.5 rounded-full ${mobileMenuColor}`} />
+                <span className={`absolute bottom-0 left-0 block w-6 h-0.5 rounded-full ${mobileMenuColor}`} />
               </div>
             </button>
           </div>
