@@ -15,6 +15,10 @@ const galleryImages = [
   "/gallery/galleryImage6.png",
   "/gallery/galleryImage7.png",
   "/gallery/galleryImage8.png",
+  "/gallery/galleryImage9.png",
+  "/gallery/galleryImage10.png",
+  "/gallery/galleryImage11.png",
+  "/gallery/galleryImage12.png",
 ];
 
 export default function GalleryPage() {
@@ -83,11 +87,11 @@ export default function GalleryPage() {
 
           {/* New Grid layout */}
           {galleryImages.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
               {galleryImages.map((src, index) => (
                 <div 
                   key={index} 
-                  className="gallery-item group relative aspect-square overflow-hidden rounded-lg cursor-pointer bg-stone-100 shadow-md transition-all duration-300 hover:shadow-xl"
+                  className="gallery-item group relative aspect-[4/5] md:aspect-square overflow-hidden rounded-lg cursor-pointer bg-stone-100 shadow-sm md:shadow-md transition-all duration-300 hover:shadow-xl"
                   onClick={() => setSelectedImage(src)}
                 >
                   <Image
