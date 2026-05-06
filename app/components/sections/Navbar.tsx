@@ -11,11 +11,11 @@ gsap.registerPlugin(useGSAP);
 
 const navItems = [
   { name: 'Home', href: '/' },
-  { name: 'About', href: '#about' },
-  { name: 'Classes', href: '#classes' },
+  { name: 'About', href: '/#about' },
+  { name: 'Classes', href: '/#classes' },
   { name: 'Gallery', href: '/gallery' },
-  { name: 'FAQs', href: '#faqs' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'FAQs', href: '/#faqs' },
+  { name: 'Contact', href: '/#contact' },
 ];
 
 export default function Navbar() {
@@ -30,10 +30,10 @@ export default function Navbar() {
   const menuBtnRef = useRef<HTMLButtonElement>(null);
 
   const isScrolledStyle = isScrolled;
-  const textColor = isScrolledStyle ? "text-white" : (isGalleryPage ? "text-stone-800" : "text-white/70");
-  const mobileMenuColor = isScrolledStyle ? "bg-primary" : (isGalleryPage ? "bg-stone-800" : "bg-primary");
+  const textColor = isScrolledStyle ? "text-stone-800" : (isGalleryPage ? "text-stone-800" : "text-white/70");
+  const mobileMenuColor = isScrolledStyle ? "bg-stone-800" : (isGalleryPage ? "bg-stone-800" : "bg-primary");
   const navBackground = isScrolledStyle 
-    ? "bg-black/20 backdrop-blur-md shadow-sm" 
+    ? "bg-black/5 backdrop-blur-md shadow-sm" 
     : "bg-transparent";
 
   useEffect(() => {
@@ -71,14 +71,27 @@ export default function Navbar() {
   });
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('#')) {
+    const isHash = href.includes('#');
+    const hash = isHash ? href.substring(href.indexOf('#')) : '';
+
+    if (isHash) {
+      if (isGalleryPage) {
+        // If on gallery page, let the default Link behavior navigate to home with hash
+        if (isOpen) toggle(false);
+        return;
+      }
+      
       e.preventDefault();
-      const element = document.querySelector(href);
+      const element = document.querySelector(hash);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
         if (isOpen) toggle(false);
       }
     } else if (href === '/') {
+      if (isGalleryPage) {
+        if (isOpen) toggle(false);
+        return;
+      }
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       if (isOpen) toggle(false);
@@ -108,11 +121,11 @@ export default function Navbar() {
           <div className="flex justify-between items-center h-auto">
             {/* Logo */}
             <Link href="/">
-              <Image src="/hadayogam.png" alt="Hadayogam Logo" width={100} height={100} className="w-16 md:w-20 " />
+              <Image src="/hadayogam.png" alt="Hadayogam Logo" width={80} height={80} className="w-16 md:w-20 " />
             </Link>
 
             {/* Desktop Links */}
-            <div className={`hidden md:flex items-center space-x-10 text-[0.85em] font-man uppercase tracking-wider ${textColor}`}>
+            <div className={`hidden md:flex items-center space-x-10 md:text-[0.875em] font-man uppercase tracking-wider ${textColor}`}>
               {navItems.map((item, index) => (
                 <Link
                   key={item.name}

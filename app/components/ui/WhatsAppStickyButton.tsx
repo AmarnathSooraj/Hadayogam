@@ -1,12 +1,20 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { FaWhatsapp } from 'react-icons/fa';
 
 export default function WhatsAppStickyButton() {
   const [isVisible, setIsVisible] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
+    // Always visible on gallery page
+    if (pathname === '/gallery') {
+      setIsVisible(true);
+      return;
+    }
+
     const handleScroll = () => {
       // Show button after scrolling past the landing page (approx 80vh)
       if (window.scrollY > window.innerHeight * 0.8) {
@@ -17,8 +25,9 @@ export default function WhatsAppStickyButton() {
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check visibility on mount
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [pathname]);
 
   if (!isVisible) return null;
 

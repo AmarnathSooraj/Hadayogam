@@ -14,18 +14,20 @@ export default function MainLayout({ children }: Readonly<{ children: React.Reac
     // Artificial delay to ensure loader is visible during initial render/refresh
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+    }, 150);
 
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
-      {isLoading && <Loader />}
-      <Navbar/>
-      <SocialSidebar />
-      <WhatsAppStickyButton />
-      <div className={`transition-opacity duration-1000 ease-in-out ${isLoading ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100'}`}>
+      <div className={`fixed inset-0 z-[9999] transition-opacity duration-700 ease-in-out pointer-events-none ${isLoading ? 'opacity-100' : 'opacity-0'}`}>
+        <Loader />
+      </div>
+      <div className={`transition-opacity duration-700 ease-in-out ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+        <Navbar/>
+        <SocialSidebar />
+        <WhatsAppStickyButton />
         {children}
         <Footer/> 
       </div>
